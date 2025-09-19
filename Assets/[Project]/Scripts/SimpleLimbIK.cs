@@ -3,16 +3,17 @@ using System.Linq;
 using Alchemy.Inspector;
 using UnityEngine;
 
-
 public class SimpleLimbIK : MonoBehaviour
 {
-    [SerializeField] private LineRenderer _lineRenderer;
     [SerializeField] private float _speed = 5;
     [SerializeField] private Transform root;
     [SerializeField] private Transform target;
     [SerializeField] private Transform effector;
+    [Space]
+    [SerializeField] private float _minAngle = 15f;
+    [SerializeField] private float _maxAngle = 160f;
+    [Space]
     [SerializeField, ReadOnly] private List<Transform> mid = new List<Transform>();
-    private int _currentMidIndex;
 
     private void OnValidate()
     {
@@ -27,9 +28,6 @@ public class SimpleLimbIK : MonoBehaviour
     private void Update()
     {
         ResolveIK();
-        _lineRenderer.positionCount = mid.Count;
-        for (int i = 0; i < mid.Count; i++)
-            _lineRenderer.SetPosition(i, mid[i].position);
     }
 
     private void ResolveIK()
@@ -38,21 +36,42 @@ public class SimpleLimbIK : MonoBehaviour
         {
             Vector2 dirPivotToEffector = effector.position - mid[i].position;
             dirPivotToEffector = dirPivotToEffector.normalized;
+            Debug.DrawRay(mid[i].position, dirPivotToEffector, Color.red);
 
             Vector2 dirPivotToTarget = target.position - mid[i].position;
             dirPivotToTarget = dirPivotToTarget.normalized;
+            Debug.DrawRay(mid[i].position, dirPivotToTarget, Color.green);
 
             float angle = Vector2.SignedAngle(dirPivotToEffector, dirPivotToTarget);
             angle *= Time.deltaTime * _speed;
-            print("signAngl : " + angle);
+            // print("signAngl : " + angle);
 
             Quaternion newRot = Quaternion.AngleAxis(angle, Vector3.forward)
                                 * mid[i].rotation;
+
+            if (i > 0)
+            {
+                float midAngle = QuaternionUtils2D.SignedAngle(mid[i - 1].rotation, newRot);
+                // print($"midAngle | {mid[i - 1].name} | {mid[i].name} : " + midAngle);
+                if (midAngle < _minAngle || midAngle > _maxAngle)
+                    continue;
+            }
+
             mid[i].rotation = newRot;
         }
+    }
+}
 
-        // _currentMidIndex++;
-        // if (_currentMidIndex >= mid.Count)
-        //     _currentMidIndex = 0;
+
+
+
+public static class QuaternionUtils2D
+{
+    public static float SignedAngle(Quaternion a, Quaternion b)
+    {
+        float angleA = a.eulerAngles.z;
+        float angleB = b.eulerAngles.z;
+
+        return Mathf.DeltaAngle(angleA, angleB);
     }
 }
