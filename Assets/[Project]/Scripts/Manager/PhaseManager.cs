@@ -31,21 +31,27 @@ public class PhaseManager : MonoBehaviour
         print("Home Phase");
         GameManager.Instance.IsGameplayEnabled = true;
         _visualSetter.SetBackground(dayData.backgroundHomeSprite);
+        _gameplayWork.EnableGameplay(false);
+        _gameplayHome.EnableGameplay(true);
         yield return new WaitForSeconds(dayData.homeDuration);
 
 
         print("Subway Phase");
         GameManager.Instance.IsGameplayEnabled = false;
         _visualSetter.SetBackground(dayData.backgroundSubwaySprite);
+        _gameplayHome.EnableGameplay(false);
+        _gameplayWork.EnableGameplay(false);
         yield return new WaitForSeconds(dayData.subwayDuration);
 
 
         print("Work Phase");
         GameManager.Instance.IsGameplayEnabled = true;
         _visualSetter.SetBackground(dayData.backgroundWorkSprite);
+        _gameplayHome.EnableGameplay(false);
+        _gameplayWork.EnableGameplay(true);
         yield return new WaitForSeconds(dayData.workDuration);
 
-
+        _gameplayWork.EnableGameplay(false);
         GameManager.Instance.IsGameplayEnabled = false;
         NextDay();
     }

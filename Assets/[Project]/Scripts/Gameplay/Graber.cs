@@ -16,6 +16,28 @@ public class Graber : MonoBehaviour
         _currentGrabable.transform.position = grabPoint.position;
     }
 
+    public void Grab(bool isGrabbing)
+    {
+        // print("Graber.Grab : " + isGrabbing);
+        if (GameManager.Instance.IsGameplayEnabled == false)
+        {
+            if (_currentGrabable)
+                Destroy(_currentGrabable.gameObject);
+            _currentGrabable = null;
+            return;
+        }
+
+        if (!isGrabbing)
+        {
+            _currentGrabable?.Release(this);
+            _currentGrabable = null;
+            return;
+        }
+
+        _currentGrabable = TryGetGrabable();
+        _currentGrabable?.Grab(this);
+    }
+
     private Grabable TryGetGrabable()
     {
         Collider2D col = Physics2D.OverlapCircle(grabPoint.position, grabRadius, grabableLayer);
@@ -24,16 +46,9 @@ public class Graber : MonoBehaviour
         return null;
     }
 
-    public void Grab(bool isGrabbing)
+    public void SetGrabable(Grabable grabable)
     {
-        print("Graber.Grab : " + isGrabbing);
-        if (!isGrabbing)
-        {
-            _currentGrabable = null;
-            return;
-        }
-
-        _currentGrabable = TryGetGrabable();
+        _currentGrabable = grabable;
     }
 
     private void OnDrawGizmos()

@@ -8,4 +8,14 @@ public class Grabable : MonoBehaviour
     {
 
     }
+
+    public virtual void Grab(Graber graber)
+    {
+        isGrabbed = true;
+    }
+
+    public virtual void Release(Graber graber)
+    {
+        isGrabbed = false;
+    }
 }
