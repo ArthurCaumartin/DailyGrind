@@ -4,7 +4,7 @@ public class Grabable : MonoBehaviour
 {
     public bool isGrabbed;
 
-    protected virtual void Update()
+    public virtual void Update()
     {
 
     }

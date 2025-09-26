@@ -22,7 +22,7 @@ public class GrabableDocument : Grabable
         storage?.StoreDocument(this);
     }
 
-    private Storage TryGetStorage()
+    protected Storage TryGetStorage()
     {
         Collider2D col = Physics2D.OverlapBox(transform.position, Vector2.one, 0, LayerMask.GetMask("Storage"));
         if(!col) return null;

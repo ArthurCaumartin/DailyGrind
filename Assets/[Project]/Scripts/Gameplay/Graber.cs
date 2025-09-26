@@ -29,6 +29,7 @@ public class Graber : MonoBehaviour
 
         if (!isGrabbing)
         {
+            print("Release grab item");
             _currentGrabable?.Release(this);
             _currentGrabable = null;
             return;
