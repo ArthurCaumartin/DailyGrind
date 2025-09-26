@@ -15,9 +15,9 @@ MonoBehaviour:
   dayList:
   - loopCount: 2
     playerSprite: {fileID: 21300000, guid: 9fbfbd76e596e994581d58750de5c5b0, type: 3}
-    homeDuration: 4
+    homeDuration: 2
     backgroundHomeSprite: {fileID: 21300000, guid: 91f8da8504569d149b45cece21ad3727, type: 3}
-    subwayDuration: 4
+    subwayDuration: 2
     backgroundSubwaySprite: {fileID: 21300000, guid: 22fb69f97e290994592f4b9c800ff9d5, type: 3}
-    workDuration: 4
+    workDuration: 2
     backgroundWorkSprite: {fileID: 21300000, guid: 6ce30403aa444c944ad36b7a562a0769, type: 3}

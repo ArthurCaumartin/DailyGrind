@@ -37,7 +37,9 @@ public class GameManager : MonoBehaviour
         DOTween.To((time) =>
         {
             CanvasManager.Instance.HidePanelFill(time);
+            _simpleLimbIK?.SetSpeed(time);
         }, 0, 0.6f, totalGameDuration).SetEase(Ease.Linear);
+        AudioManager.Instance.MusicPitchAnimation(totalGameDuration);
     }
 
     public void NextPhase()

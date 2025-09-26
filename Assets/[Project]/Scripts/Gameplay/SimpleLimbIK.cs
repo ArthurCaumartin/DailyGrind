@@ -6,11 +6,15 @@ using UnityEngine;
 public class SimpleLimbIK : MonoBehaviour
 {
     [SerializeField] private Transform _resetTargetTransform;
+    [Header("Speed")]
     [SerializeField] private float _speed = 5;
+    [SerializeField] private float _startSpeed = 5;
+    [SerializeField] private float _endSpeed = 1;
+    [Header("References")]
     [SerializeField] private Transform root;
     [SerializeField] private Transform target;
     [SerializeField] private Transform effector;
-    [Space]
+    [Header("Constraints")]
     [SerializeField] private bool _flip;
     [SerializeField] private float _minAngle = 15f;
     [SerializeField] private float _maxAngle = 160f;
@@ -77,5 +81,10 @@ public class SimpleLimbIK : MonoBehaviour
     public void EnableIK(bool isEnabled)
     {
         _isIKEnabled = isEnabled;
+    }
+
+    public void SetSpeed(float t)
+    {
+        _speed = Mathf.Lerp(_startSpeed, _endSpeed, t);
     }
 }
