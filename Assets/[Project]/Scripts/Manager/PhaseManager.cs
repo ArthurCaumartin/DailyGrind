@@ -9,6 +9,7 @@ public class PhaseManager : MonoBehaviour
     [SerializeField] private SimpleLimbIK _simpleLimbIK;
     [SerializeField] private GameplayContainer _gameplayHome;
     [SerializeField] private GameplayContainer _gameplayWork;
+    [SerializeField] private GameplayContainerSubway _gameplaySubway;
 
     private PhaseData _currentPhaseData;
     private DayData _currentDayData;
@@ -28,27 +29,36 @@ public class PhaseManager : MonoBehaviour
     {
         _visualSetter.SetPlayer(dayData.playerSprite);
 
-        print("Home Phase");
+        // print("Home Phase");
         GameManager.Instance.IsGameplayEnabled = true;
-        _visualSetter.SetBackground(dayData.backgroundHomeSprite);
-        _gameplayWork.EnableGameplay(false);
-        _gameplayHome.EnableGameplay(true);
+        _visualSetter.SetBackground(dayData.backgroundHomeSprite, () =>
+        {
+            _gameplayWork.EnableGameplay(false);
+            _gameplaySubway.EnableGameplay(false);
+            _gameplayHome.EnableGameplay(true);
+        });
         yield return new WaitForSeconds(dayData.homeDuration);
 
 
-        print("Subway Phase");
+        // print("Subway Phase");
         GameManager.Instance.IsGameplayEnabled = false;
-        _visualSetter.SetBackground(dayData.backgroundSubwaySprite);
-        _gameplayHome.EnableGameplay(false);
-        _gameplayWork.EnableGameplay(false);
+        _visualSetter.SetBackground(dayData.backgroundSubwaySprite, () =>
+        {
+            _gameplayHome.EnableGameplay(false);
+            _gameplaySubway.EnableGameplayWithDuration(true, dayData.subwayDuration);
+            _gameplayWork.EnableGameplay(false);
+        });
         yield return new WaitForSeconds(dayData.subwayDuration);
 
 
-        print("Work Phase");
+        // print("Work Phase");
         GameManager.Instance.IsGameplayEnabled = true;
-        _visualSetter.SetBackground(dayData.backgroundWorkSprite);
-        _gameplayHome.EnableGameplay(false);
-        _gameplayWork.EnableGameplay(true);
+        _visualSetter.SetBackground(dayData.backgroundWorkSprite, () =>
+        {
+            _gameplayHome.EnableGameplay(false);
+            _gameplaySubway.EnableGameplay(false);
+            _gameplayWork.EnableGameplay(true);
+        });
         yield return new WaitForSeconds(dayData.workDuration);
 
         _gameplayWork.EnableGameplay(false);
@@ -66,7 +76,7 @@ public class PhaseManager : MonoBehaviour
             return;
         }
 
-        print("Phase Ended");
+        // print("Phase Ended");
         onPhaseEnded?.Invoke();
     }
 }

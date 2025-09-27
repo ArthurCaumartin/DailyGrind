@@ -1266,14 +1266,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1617687933565255399, guid: 59bf7823fb162b149a2e204b953899e9, type: 3}
-      propertyPath: m_SortingOrder
-      value: -90
+    - target: {fileID: 4152073809389567791, guid: 59bf7823fb162b149a2e204b953899e9, type: 3}
+      propertyPath: _clipName
+      value: Controler_SubwayBackground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152073809389567791, guid: 59bf7823fb162b149a2e204b953899e9, type: 3}
+      propertyPath: _stateName
+      value: Subway_Background
       objectReference: {fileID: 0}
     - target: {fileID: 4259113444765883384, guid: 59bf7823fb162b149a2e204b953899e9, type: 3}
       propertyPath: _playerSpriteRenderer
       value: 
       objectReference: {fileID: 208974050}
+    - target: {fileID: 4930152658176447277, guid: 59bf7823fb162b149a2e204b953899e9, type: 3}
+      propertyPath: _animatorTriggers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930152658176447277, guid: 59bf7823fb162b149a2e204b953899e9, type: 3}
+      propertyPath: '_animatorTriggers.Array.data[1]'
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5480891495028518003, guid: 59bf7823fb162b149a2e204b953899e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1314,6 +1326,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7154572794550623762, guid: 59bf7823fb162b149a2e204b953899e9, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 8f070a9c5065e634b85bbf7561c3911a, type: 2}
     - target: {fileID: 7449318479816026947, guid: 59bf7823fb162b149a2e204b953899e9, type: 3}
       propertyPath: m_Name
       value: Game Phases Container
@@ -1322,6 +1338,22 @@ PrefabInstance:
       propertyPath: _simpleLimbIK
       value: 
       objectReference: {fileID: 2009930933}
+    - target: {fileID: 9216156388338114083, guid: 59bf7823fb162b149a2e204b953899e9, type: 3}
+      propertyPath: _clipName
+      value: Clip_SubwayPeople
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216156388338114083, guid: 59bf7823fb162b149a2e204b953899e9, type: 3}
+      propertyPath: _stateName
+      value: Subway_People
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216156388338114083, guid: 59bf7823fb162b149a2e204b953899e9, type: 3}
+      propertyPath: _triggerName
+      value: Clip_SubwayPeople
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216156388338114083, guid: 59bf7823fb162b149a2e204b953899e9, type: 3}
+      propertyPath: _clipDuration
+      value: 2.55
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

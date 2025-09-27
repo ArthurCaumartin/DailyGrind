@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -22,10 +23,10 @@ public class VisualSetter : MonoBehaviour
         _playerSpriteRenderer.sprite = sprite;
     }
 
-    public void SetBackground(Sprite sprite)
+    public void SetBackground(Sprite sprite, Action onComplete = null)
     {
         if (!sprite) return;
-        BackAnimation(sprite);
+        BackAnimation(sprite, onComplete);
     }
 
     public void SetDesk(Sprite sprite)
@@ -34,7 +35,7 @@ public class VisualSetter : MonoBehaviour
         _deskSpriteRenderer.sprite = sprite;
     }
 
-    private void BackAnimation(Sprite sprite)
+    private void BackAnimation(Sprite sprite, Action onComplete = null)
     {
         Vector3 botLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
         botLeft.z = 0;
@@ -53,6 +54,7 @@ public class VisualSetter : MonoBehaviour
         {
             _backgroundSpriteRenderer.sprite = sprite;
             _transitionSpriteRenderer.transform.position = botRight;
+            onComplete?.Invoke();
         });
     }
 }
