@@ -19,14 +19,6 @@ public class Graber : MonoBehaviour
     public void Grab(bool isGrabbing)
     {
         // print("Graber.Grab : " + isGrabbing);
-        if (GameManager.Instance.IsGameplayEnabled == false)
-        {
-            if (_currentGrabable)
-                Destroy(_currentGrabable.gameObject);
-            _currentGrabable = null;
-            return;
-        }
-
         if (!isGrabbing)
         {
             print("Release grab item");

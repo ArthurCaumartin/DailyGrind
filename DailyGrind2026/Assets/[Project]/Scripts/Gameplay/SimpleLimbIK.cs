@@ -39,7 +39,7 @@ public class SimpleLimbIK : MonoBehaviour
 
     private void ResolveIK()
     {
-        Transform target = GameManager.Instance.IsGameplayEnabled ? this.target : _resetTargetTransform;
+        Transform target = this.target;
         for (int i = 0; i < mid.Count; i++)
         {
             Vector2 dirPivotToEffector = effector.position - mid[i].position;
