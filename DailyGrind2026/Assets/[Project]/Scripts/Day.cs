@@ -1,6 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 
 
 public class Day : MonoBehaviour
@@ -14,9 +14,14 @@ public class Day : MonoBehaviour
 
     public float Duration => _duration;
 
-    public void PlayDay(float timeOffset)
+    public IEnumerator PlayDay(float timeOffset)
     {
-        
+        PlayHome();
+        yield return new WaitForSeconds((_duration / 3) + timeOffset);
+        PlaySubway();
+        yield return new WaitForSeconds((_duration / 3) + timeOffset);
+        PlayWork();
+        yield return new WaitForSeconds((_duration / 3) + timeOffset);
     }
 
     public void PlayHome()
