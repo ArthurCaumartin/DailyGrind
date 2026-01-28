@@ -39,32 +39,28 @@ public class SimpleLimbIK : MonoBehaviour
 
     private void ResolveIK()
     {
-        Transform target = this.target;
+        if (!_isIKEnabled)
+            return;
+
         for (int i = 0; i < mid.Count; i++)
         {
-            Vector2 dirPivotToEffector = effector.position - mid[i].position;
-            dirPivotToEffector = dirPivotToEffector.normalized;
-            Debug.DrawRay(mid[i].position, dirPivotToEffector, Color.red);
-
-            Vector2 dirPivotToTarget = target.position - mid[i].position;
-            dirPivotToTarget = dirPivotToTarget.normalized;
-            Debug.DrawRay(mid[i].position, dirPivotToTarget, Color.green);
+            Vector2 dirPivotToEffector = (effector.position - mid[i].position).normalized;
+            Vector2 dirPivotToTarget = (target.position - mid[i].position).normalized;
 
             float angle = Vector2.SignedAngle(dirPivotToEffector, dirPivotToTarget);
             if (_flip)
                 angle = -angle;
-            angle *= Time.deltaTime * _speed;
-            // print("signAngl : " + angle);
 
-            Quaternion newRot = Quaternion.AngleAxis(angle, Vector3.forward)
-                                * mid[i].rotation;
+            angle *= Time.deltaTime * _speed;
+
+            Quaternion newRot =
+                Quaternion.AngleAxis(angle, Vector3.forward) * mid[i].rotation;
 
             if (i > 0)
             {
-                float midAngle = QuaternionUtils2D.SignedAngle(mid[i - 1].rotation, newRot);
-                if (_flip)
-                    midAngle = -midAngle;
-                // print($"midAngle | {mid[i - 1].name} | {mid[i].name} : " + midAngle);
+                float midAngle =
+                    QuaternionUtils2D.SignedAngle(mid[i - 1].rotation, newRot);
+
                 if (midAngle < _minAngle || midAngle > _maxAngle)
                     continue;
             }

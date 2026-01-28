@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class GameSequence : MonoBehaviour
+public class GameSequencer : MonoBehaviour
 {
     private Day[] _dayArray;
     private float _totalDuration;
