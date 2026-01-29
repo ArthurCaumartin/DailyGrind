@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 906561046482596500}
   - component: {fileID: 7914515832059045420}
+  - component: {fileID: 7747168706506783146}
   - component: {fileID: 5307568309928888178}
   - component: {fileID: 825531140384097206}
   m_Layer: 0
@@ -66,6 +67,20 @@ MonoBehaviour:
   m_DefaultActionMap: Base Map
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &7747168706506783146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3167735693018090693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a26c34854aa941d49958dca1df8c5582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerRederer: {fileID: 380723866659317934}
+  _playerDeaultSprite: {fileID: 21300000, guid: 57d99470610f4db4e84756ae29b55fc2, type: 3}
 --- !u!114 &5307568309928888178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +165,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8066f9dc8625b3546b7cea11f93aeafe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -170,7 +185,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 21300000, guid: 57d99470610f4db4e84756ae29b55fc2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -196,7 +211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1293378538966321883, guid: 8370820daa43e1944985695c4cfd239d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.292
+      value: 0.303
       objectReference: {fileID: 0}
     - target: {fileID: 1293378538966321883, guid: 8370820daa43e1944985695c4cfd239d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -208,7 +223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1917342990627501443, guid: 8370820daa43e1944985695c4cfd239d, type: 3}
       propertyPath: _flip
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2211941016712694242, guid: 8370820daa43e1944985695c4cfd239d, type: 3}
       propertyPath: m_Sprite
@@ -217,10 +232,14 @@ PrefabInstance:
     - target: {fileID: 2211941016712694242, guid: 8370820daa43e1944985695c4cfd239d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 2100000, guid: 8066f9dc8625b3546b7cea11f93aeafe, type: 2}
     - target: {fileID: 4093099816416543487, guid: 8370820daa43e1944985695c4cfd239d, type: 3}
       propertyPath: m_Name
       value: Arm_Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107825008630121507, guid: 8370820daa43e1944985695c4cfd239d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.62
       objectReference: {fileID: 0}
     - target: {fileID: 4947594392801190867, guid: 8370820daa43e1944985695c4cfd239d, type: 3}
       propertyPath: m_Sprite
@@ -229,14 +248,14 @@ PrefabInstance:
     - target: {fileID: 4947594392801190867, guid: 8370820daa43e1944985695c4cfd239d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 2100000, guid: 8066f9dc8625b3546b7cea11f93aeafe, type: 2}
     - target: {fileID: 5152965006248145131, guid: 8370820daa43e1944985695c4cfd239d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.106
+      value: 0.099
       objectReference: {fileID: 0}
     - target: {fileID: 5152965006248145131, guid: 8370820daa43e1944985695c4cfd239d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.598
+      value: -0.478
       objectReference: {fileID: 0}
     - target: {fileID: 5701781714502028277, guid: 8370820daa43e1944985695c4cfd239d, type: 3}
       propertyPath: m_LocalPosition.x
