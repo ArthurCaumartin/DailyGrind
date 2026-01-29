@@ -1,22 +1,38 @@
+using System.Collections;
 using UnityEngine;
 
 public class DayTime : MonoBehaviour
 {
-    [SerializeField, Tooltip("Dur = enterAnim + duration + exitAnim")] private float _duration;
-    [Space]
+    [SerializeField] private float _duration = 2;
     [SerializeField] private Animator _animator;
+    [SerializeField] private Animator _animatorMid;
     [SerializeField] private AnimationClip _enterClip;
     [SerializeField] private AnimationClip _midLoopClip;
     [SerializeField] private AnimationClip _exitClip;
+    [HideInInspector] public float totalDuration;
 
-    public float GetDuration()
+    public float ExitClipDuration => _exitClip.length;
+
+    private void Awake()
     {
-        float inOutAnimDuration = 0;
-        if (_enterClip)
-            inOutAnimDuration += _enterClip.length;
-        if (_exitClip)
-            inOutAnimDuration += _enterClip.length;
+        totalDuration = _enterClip.length + _duration;
+        // if (_midLoopClip)
+        //     totalDuration += _midLoopClip.length;
+    }
 
-        return _duration + inOutAnimDuration;
+    public void PlayDayTime()
+    {
+        StartCoroutine(DelayCoroutine());
+    }
+
+    private IEnumerator DelayCoroutine()
+    {
+        _animator.Play("Enter");
+        yield return new WaitForSeconds(_enterClip.length);
+        _animatorMid.Play("Mid");
+        yield return new WaitForSeconds(_duration);
+        _animator.Play("Exit");
+        yield return new WaitForSeconds(_exitClip.length + 2);
+        gameObject.SetActive(false);
     }
 }

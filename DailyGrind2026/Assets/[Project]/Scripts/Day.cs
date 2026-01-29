@@ -1,50 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.EditorTools;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class Day : MonoBehaviour
 {
-    [SerializeField] private List<DayTime> _dayTimeList = new List<DayTime>();
+    private DayTime[] _dayTimeArray;
+    private UnityEvent _onDayFinish = new UnityEvent();
+    public UnityEvent OnDayFinishEvent => _onDayFinish;
 
-    private float _duration;
-    public float Duration => _duration;
-
-    private void ComputeDuration()
+    private void Awake()
     {
-        _duration = 0;
-        foreach (var item in _dayTimeList)
+        _dayTimeArray = GetComponentsInChildren<DayTime>();
+        foreach (var item in _dayTimeArray)
+            item.gameObject.SetActive(false);
+    }
+
+    public void StartDayCoroutine()
+    {
+        StartCoroutine(DayLoopCoroutine());
+    }
+
+    private IEnumerator DayLoopCoroutine()
+    {
+        for (int i = 0; i < _dayTimeArray.Length; i++)
         {
-            _duration += item.GetDuration();
+            _dayTimeArray[i].gameObject.SetActive(true);
+            _dayTimeArray[i].PlayDayTime();
+
+            float endAnimDuration = i == _dayTimeArray.Length - 1 ? _dayTimeArray[i].ExitClipDuration : 0;
+            yield return new WaitForSeconds(_dayTimeArray[i].totalDuration + endAnimDuration);
         }
+        _onDayFinish.Invoke();
     }
-
-    public IEnumerator PlayDay(float timeOffset)
-    {
-        // PlayHome();
-        yield return new WaitForSeconds((_duration / 3) + timeOffset);
-        // PlaySubway();
-        // yield return new WaitForSeconds((_duration / 3) + timeOffset);
-        // PlayWork();
-        // yield return new WaitForSeconds((_duration / 3) + timeOffset);
-    }
-
-    // public void PlayHome()
-    // {
-    //     _subway.SetActive(false);
-    //     _work.SetActive(false);
-    // }
-
-    // public void PlaySubway()
-    // {
-    //     _home.SetActive(false);
-    //     _work.SetActive(false);
-    // }
-
-    // public void PlayWork()
-    // {
-    //     _subway.SetActive(false);
-    //     _home.SetActive(false);
-    // }
 }
