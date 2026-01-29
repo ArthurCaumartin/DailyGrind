@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 public class DayBoucle : MonoBehaviour
 {
+    [SerializeField] private Sprite _playerSpriteToSet;
     [SerializeField] private UnityEvent _onBoucleFinish;
     [SerializeField] public List<Day> _dayList = new List<Day>();
 
@@ -17,6 +18,8 @@ public class DayBoucle : MonoBehaviour
 
     public void PlayDay(int indexToPlay)
     {
+        PlayerManager.Instance.SetPlayerSprite(_playerSpriteToSet);
+
         print("Call index : " + indexToPlay);
         Day currentDay = _dayList[indexToPlay];
         currentDay.gameObject.SetActive(true);
