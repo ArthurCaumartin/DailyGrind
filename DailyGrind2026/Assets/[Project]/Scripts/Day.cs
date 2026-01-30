@@ -11,11 +11,13 @@ public class Day : MonoBehaviour
     private UnityEvent _onDayFinish = new UnityEvent();
     public UnityEvent OnDayFinishEvent => _onDayFinish;
 
-    private void Awake()
+    public void Init()
     {
         _dayTimeArray = GetComponentsInChildren<DayTime>();
         foreach (var item in _dayTimeArray)
             item.gameObject.SetActive(false);
+
+        gameObject.SetActive(false);
     }
 
     public void StartDayCoroutine()
@@ -27,9 +29,7 @@ public class Day : MonoBehaviour
     {
         for (int i = 0; i < _dayTimeArray.Length; i++)
         {
-            _dayTimeArray[i].gameObject.SetActive(true);
             _dayTimeArray[i].PlayDayTime();
-
             float endAnimDuration = i == _dayTimeArray.Length - 1 ? _dayTimeArray[i].ExitClipDuration : 0;
             yield return new WaitForSeconds(_dayTimeArray[i].totalDuration + endAnimDuration);
         }

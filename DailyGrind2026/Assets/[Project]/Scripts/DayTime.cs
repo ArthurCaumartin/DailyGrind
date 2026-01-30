@@ -22,6 +22,7 @@ public class DayTime : MonoBehaviour
 
     public void PlayDayTime()
     {
+        gameObject.SetActive(true);
         StartCoroutine(DelayCoroutine());
     }
 
@@ -32,7 +33,7 @@ public class DayTime : MonoBehaviour
         _animatorMid.Play("Mid");
         yield return new WaitForSeconds(_duration);
         _animator.Play("Exit");
-        yield return new WaitForSeconds(_exitClip.length + 2);
+        yield return new WaitForSeconds(_exitClip.length + 1f);
         gameObject.SetActive(false);
     }
 }

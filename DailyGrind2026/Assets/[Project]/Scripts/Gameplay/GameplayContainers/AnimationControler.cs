@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AnimationControler : MonoBehaviour
 {
-    [SerializeField] private bool _playReverse = false;
     [SerializeField] private Animator _animator;
     [SerializeField] private string _clipName = "clip";
     [SerializeField] private string _stateName = "state";

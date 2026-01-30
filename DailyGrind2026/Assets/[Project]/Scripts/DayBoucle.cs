@@ -1,34 +1,45 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class DayBoucle : MonoBehaviour
 {
     [SerializeField] private Sprite _playerSpriteToSet;
-    [SerializeField] private UnityEvent _onBoucleFinish;
-    [SerializeField] public List<Day> _dayList = new List<Day>();
+    private List<Day> _dayList = new List<Day>();
+    public Action _toDoWhenBoucleEnd;
 
-    private void Start()
+    private void Awake()
     {
-        _dayList.RemoveAll(obj => obj == null);
+        _dayList = GetComponentsInChildren<Day>().ToList();
         foreach (var item in _dayList)
-            item.gameObject.SetActive(false);
+            item.Init();
+    }
+
+    public void StartBoucle(Action toDoAfter)
+    {
+        _toDoWhenBoucleEnd = toDoAfter;
         PlayDay(0);
     }
 
-    public void PlayDay(int indexToPlay)
+    private void PlayDay(int indexToPlay)
     {
         PlayerManager.Instance.SetPlayerSprite(_playerSpriteToSet);
 
-        print("Call index : " + indexToPlay);
+        // print("Call index : " + indexToPlay);
         Day currentDay = _dayList[indexToPlay];
         currentDay.gameObject.SetActive(true);
         currentDay.StartDayCoroutine();
 
         if (indexToPlay >= _dayList.Count - 1)
         {
-            print("Last Day !");
-            currentDay.OnDayFinishEvent.AddListener(() => _onBoucleFinish.Invoke());
+            // print("Last Day !");
+            currentDay.OnDayFinishEvent.AddListener(() =>
+            {
+                _toDoWhenBoucleEnd?.Invoke();
+                gameObject.SetActive(false);
+            });
             return;
         }
 
@@ -36,7 +47,6 @@ public class DayBoucle : MonoBehaviour
         {
             _dayList[indexToPlay].gameObject.SetActive(false);
             PlayDay(indexToPlay + 1);
-            print("soeifh");
         });
     }
 }
