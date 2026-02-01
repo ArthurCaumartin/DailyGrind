@@ -9,12 +9,13 @@ public class DayBoucle : MonoBehaviour
     [SerializeField] private Sprite _playerSpriteToSet;
     private List<Day> _dayList = new List<Day>();
     public Action _toDoWhenBoucleEnd;
+    public float duration;
 
     private void Awake()
     {
         _dayList = GetComponentsInChildren<Day>().ToList();
         foreach (var item in _dayList)
-            item.Init();
+            duration += item.Init();
     }
 
     public void StartBoucle(Action toDoAfter)

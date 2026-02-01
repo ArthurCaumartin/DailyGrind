@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,14 +8,18 @@ public class Day : MonoBehaviour
     private DayTime[] _dayTimeArray;
     private UnityEvent _onDayFinish = new UnityEvent();
     public UnityEvent OnDayFinishEvent => _onDayFinish;
+    float _dayDuration;
 
-    public void Init()
+    public float Init()
     {
         _dayTimeArray = GetComponentsInChildren<DayTime>();
         foreach (var item in _dayTimeArray)
+        {
+            _dayDuration += item.Init();
             item.gameObject.SetActive(false);
-
+        }
         gameObject.SetActive(false);
+        return _dayDuration;
     }
 
     public void StartDayCoroutine()
@@ -30,7 +32,7 @@ public class Day : MonoBehaviour
         for (int i = 0; i < _dayTimeArray.Length - 1; i++)
         {
             _dayTimeArray[i].PlayDayTime();
-            yield return new WaitForSeconds(_dayTimeArray[i].totalDuration + _dayTimeArray[i].ExitClipDuration);
+            yield return new WaitForSeconds(_dayTimeArray[i].totalDuration);
         }
         _dayTimeArray[_dayTimeArray.Length - 1].PlayDayTime();
         yield return new WaitForSeconds(_dayTimeArray[_dayTimeArray.Length - 1].totalDuration);

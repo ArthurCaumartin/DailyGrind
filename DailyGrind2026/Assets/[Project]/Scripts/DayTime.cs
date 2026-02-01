@@ -13,11 +13,9 @@ public class DayTime : MonoBehaviour
 
     public float ExitClipDuration => _exitClip.length;
 
-    private void Awake()
+    public float Init()
     {
-        totalDuration = _enterClip.length + _duration;
-        // if (_midLoopClip)
-        //     totalDuration += _midLoopClip.length;
+        return totalDuration = _enterClip.length + _duration;
     }
 
     public void PlayDayTime()

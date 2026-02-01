@@ -46,7 +46,7 @@ public class SimpleLimbIK : MonoBehaviour
         {
             float targetToEffectorDistance = Vector2.Distance(target.position, effector.position);
 
-            print("Dis : " + targetToEffectorDistance);
+            // print("Dis : " + targetToEffectorDistance);
             Vector2 dirPivotToEffector = (effector.position - mid[i].position).normalized;
             Vector2 dirPivotToTarget = (target.position - mid[i].position).normalized;
 

@@ -8,10 +8,14 @@ public class CanvasManager : MonoBehaviour
     public static CanvasManager Instance;
 
     [SerializeField] private Image _imageAplhaHider;
-    // [SerializeField] private AnimationCurve _alphaHideCurve;
     [Space]
     [SerializeField] private Image _imageLeftHider;
     [SerializeField] private Image _imageRightHider;
+    [SerializeField] private AnimationCurve _hideCurve;
+    [Space]
+    [SerializeField] private CanvasGroup _canvasGroup;
+    [SerializeField] private Button _buttonYes;
+    [SerializeField] private Button _buttonNo;
 
     private void Awake()
     {
@@ -48,5 +52,32 @@ public class CanvasManager : MonoBehaviour
     {
         _imageLeftHider.fillAmount = fillValue;
         _imageRightHider.fillAmount = fillValue;
+    }
+
+    public void PanelAnimation(float duration, bool startOpen, Action after = null)
+    {
+        float start = startOpen ? 0 : 1;
+        float end = startOpen ? 1 : 0;
+        DOTween.To((time) =>
+        {
+            HidePanelFill(time);
+        }, start, end, duration)
+        .SetEase(_hideCurve)
+        .OnComplete(() => after?.Invoke());
+    }
+
+    public void ShowChoice()
+    {
+        _buttonYes.enabled = false;
+        _buttonNo.enabled = false;
+        DOTween.To((time) =>
+        {
+            _canvasGroup.alpha = time;
+        }, 0, 1, 2)
+        .OnComplete(() =>
+        {
+            _buttonYes.enabled = true;
+            _buttonNo.enabled = true;
+        });
     }
 }
