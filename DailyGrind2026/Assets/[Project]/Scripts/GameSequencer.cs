@@ -10,12 +10,10 @@ public class GameSequencer : MonoBehaviour
 
     public void Start()
     {
-        // _firstLoop.StartBoucle(() =>
-        // {
-        //     _secondLoop.StartBoucle(null);
-        // });
-
-        _firstLoop.StartBoucle(null);
+        _firstLoop.StartBoucle(() =>
+        {
+            _secondLoop.StartBoucle(null);
+        });
     }
 
 

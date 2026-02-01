@@ -45,7 +45,6 @@ public class DayBoucle : MonoBehaviour
 
         currentDay.OnDayFinishEvent.AddListener(() =>
         {
-            _dayList[indexToPlay].gameObject.SetActive(false);
             PlayDay(indexToPlay + 1);
         });
     }

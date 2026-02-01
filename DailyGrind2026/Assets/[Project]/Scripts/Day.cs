@@ -27,12 +27,16 @@ public class Day : MonoBehaviour
 
     private IEnumerator DayLoopCoroutine()
     {
-        for (int i = 0; i < _dayTimeArray.Length; i++)
+        for (int i = 0; i < _dayTimeArray.Length - 1; i++)
         {
             _dayTimeArray[i].PlayDayTime();
-            float endAnimDuration = i == _dayTimeArray.Length - 1 ? _dayTimeArray[i].ExitClipDuration : 0;
-            yield return new WaitForSeconds(_dayTimeArray[i].totalDuration + endAnimDuration);
+            yield return new WaitForSeconds(_dayTimeArray[i].totalDuration + _dayTimeArray[i].ExitClipDuration);
         }
+        _dayTimeArray[_dayTimeArray.Length - 1].PlayDayTime();
+        yield return new WaitForSeconds(_dayTimeArray[_dayTimeArray.Length - 1].totalDuration);
         _onDayFinish.Invoke();
+        yield return new WaitForSeconds(_dayTimeArray[_dayTimeArray.Length - 1].ExitClipDuration);
+        gameObject.SetActive(false);
+
     }
 }
