@@ -1,42 +1,38 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 
 public class Day : MonoBehaviour
 {
-    [SerializeField] private float _duration = 3f;
+    private DayTime[] _dayTimeArray;
+    private UnityEvent _onDayFinish = new UnityEvent();
+    public UnityEvent OnDayFinishEvent => _onDayFinish;
 
-    [SerializeField] private GameObject _home;
-    [SerializeField] private GameObject _subway;
-    [SerializeField] private GameObject _work;
-
-
-    public float Duration => _duration;
-
-    public void PlayDay(float timeOffset)
+    private void Awake()
     {
-        
+        _dayTimeArray = GetComponentsInChildren<DayTime>();
+        foreach (var item in _dayTimeArray)
+            item.gameObject.SetActive(false);
     }
 
-    public void PlayHome()
+    public void StartDayCoroutine()
     {
-        _subway.SetActive(false);
-        _work.SetActive(false);
+        StartCoroutine(DayLoopCoroutine());
     }
 
-    public void PlaySubway()
+    private IEnumerator DayLoopCoroutine()
     {
-        _home.SetActive(false);
-        _work.SetActive(false);
-    }
+        for (int i = 0; i < _dayTimeArray.Length; i++)
+        {
+            _dayTimeArray[i].gameObject.SetActive(true);
+            _dayTimeArray[i].PlayDayTime();
 
-    public void PlayWork()
-    {
-        _subway.SetActive(false);
-        _home.SetActive(false);
+            float endAnimDuration = i == _dayTimeArray.Length - 1 ? _dayTimeArray[i].ExitClipDuration : 0;
+            yield return new WaitForSeconds(_dayTimeArray[i].totalDuration + endAnimDuration);
+        }
+        _onDayFinish.Invoke();
     }
 }
-
-
-
