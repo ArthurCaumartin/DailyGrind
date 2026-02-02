@@ -66,6 +66,14 @@ public class CanvasManager : MonoBehaviour
         .OnComplete(() => after?.Invoke());
     }
 
+    public void HideChoice()
+    {
+        DOTween.To((time) =>
+        {
+            _canvasGroup.alpha = 1 - time;
+        }, 0, 1, 1);
+    }
+
     public void ShowChoice()
     {
         _buttonYes.enabled = false;

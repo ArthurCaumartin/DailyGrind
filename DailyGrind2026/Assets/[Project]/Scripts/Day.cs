@@ -39,6 +39,5 @@ public class Day : MonoBehaviour
         _onDayFinish.Invoke();
         yield return new WaitForSeconds(_dayTimeArray[_dayTimeArray.Length - 1].ExitClipDuration);
         gameObject.SetActive(false);
-
     }
 }

@@ -950,7 +950,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13de23139a157f840be7dbbfac21faf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 10
+  _ambianceClip: {fileID: 0}
+  _duration: 2
   _animator: {fileID: 2752422017570424179}
   _animatorMid: {fileID: 1471325667229720597}
   _enterClip: {fileID: 7400000, guid: bde8de3c95570c34abcbdfdc8d9b3682, type: 2}

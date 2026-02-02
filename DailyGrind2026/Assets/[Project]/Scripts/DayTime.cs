@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class DayTime : MonoBehaviour
 {
+    [SerializeField] AudioClip _ambianceClip;
+    [Space]
     [SerializeField] private float _duration = 2;
     [SerializeField] private Animator _animator;
     [SerializeField] private Animator _animatorMid;
@@ -20,6 +22,7 @@ public class DayTime : MonoBehaviour
 
     public void PlayDayTime()
     {
+        AudioManager.Instance.SwapAmbiance(_ambianceClip);
         gameObject.SetActive(true);
         StartCoroutine(DelayCoroutine());
     }

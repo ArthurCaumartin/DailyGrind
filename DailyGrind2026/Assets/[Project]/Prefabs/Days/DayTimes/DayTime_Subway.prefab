@@ -132,7 +132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13de23139a157f840be7dbbfac21faf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 10
+  _ambianceClip: {fileID: 0}
+  _duration: 2
   _animator: {fileID: 4008184891396039473}
   _animatorMid: {fileID: 1881403874648916014}
   _enterClip: {fileID: 7400000, guid: e0feb297d03e0bf478b8416e9b5c561c, type: 2}
